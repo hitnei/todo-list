@@ -20,3 +20,47 @@
 .App-link {
   color: #09d3ac;
 }
+
+.sort_selected::after{
+  content: '\f00c';
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+}
+
+.panel-heading{
+  display: flex;
+}
+.btn-danger{
+  float: right;
+}
+.close {
+  position: absolute;
+  right: auto;
+  /* top: 32px;
+  width: 32px;
+  height: 32px; */
+  opacity: 0.3;
+}
+.close:hover {
+  opacity: 1;
+}
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 20px;
+  width: 2px;
+  background-color: #333;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}
+.panel-heading div{
+  margin-left: auto;
+  margin-right: 20px;
+}
