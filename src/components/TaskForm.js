@@ -59,7 +59,7 @@ export default class TaskForm extends Component {
         this.onCloseForm()
     }
     onClear = (e) => {
-        e.preventDefault()
+        // e.preventDefault()
         this.setState({
             id: '',
             name: '',
