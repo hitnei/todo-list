@@ -4,7 +4,7 @@ import Control from './components/Control'
 import TaskList from './components/TaskList'
 import i18next from 'i18next'
 import './i18n'
-import { useTranslation, withTranslation, Trans } from 'react-i18next';
+// import { useTranslation} from 'react-i18next';
 import './App.css'
 require('dotenv').config();
 
@@ -25,7 +25,7 @@ export default class App extends Component {
       }
     }
   }
-  componentWillMount(){
+  UNSAFE_componentWillMount(){
     if (localStorage && localStorage.getItem('tasks')){
       var tasks = JSON.parse(localStorage.getItem('tasks'))
       this.setState({
@@ -161,7 +161,7 @@ export default class App extends Component {
   //   localStorage.setItem("tasks", JSON.stringify(tasks))
   // }
   render() {
-    const { t, i18n } = useTranslation;
+    // const { t, i18n } = useTranslation;
     const onChangeLanguage = (lng) => {
       i18next.changeLanguage(lng);
       window.render(window.location.replace(window.location.pathname + window.location.search + window.location.hash))
@@ -229,9 +229,9 @@ export default class App extends Component {
         </div>
         
         <div className="btnGroup">
-          <a><button type="button" className="btn btn-primary" value="en" onClick = {() => onChangeLanguage('en')}>EN</button></a>
-          <a><button type="button" className="btn btn-primary" onClick = {() => onChangeLanguage('ja')}>JA</button></a>
-          <a><button type="button" className="btn btn-primary" onClick = {() => onChangeLanguage('vn')}>VN</button></a>
+          <a href="/"><button type="button" className="btn btn-primary" value="en" onClick = {() => onChangeLanguage('en')}>EN</button></a>
+          <a href="/"><button type="button" className="btn btn-primary" onClick = {() => onChangeLanguage('ja')}>JA</button></a>
+          <a href="/"><button type="button" className="btn btn-primary" onClick = {() => onChangeLanguage('vn')}>VN</button></a>
         </div>
       </div>
     )
