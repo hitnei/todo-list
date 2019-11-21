@@ -34,7 +34,17 @@ var myReducer = (state = initialState, action) => {
             localStorage.setItem("tasks", JSON.stringify(state))
             return [...state]
             
-        default: return state
+        case types.DELETE_TASK:
+            state.forEach((task, index) => {
+                if (task.id === action.id) {
+                    state.splice(index, 1)
+                }
+            })
+            localStorage.setItem("tasks", JSON.stringify(state))
+            return [...state]
+
+        default: 
+            return state
     }
 }
 

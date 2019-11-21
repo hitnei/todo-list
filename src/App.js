@@ -33,19 +33,6 @@ class App extends Component {
       isShowTaskForm: false
     })
   }
-  onDelete = (id) => {
-    var { tasks } = this.state
-    tasks.forEach((task, index) => {
-      if (task.id === id) {
-        tasks.splice(index, 1)
-        this.setState({
-          tasks
-        })
-        localStorage.setItem("tasks", JSON.stringify(tasks))
-      }
-    })
-    this.onCloseForm()
-  }
   onShowForm = () => {
     this.setState({
       isShowTaskForm: true
@@ -149,7 +136,7 @@ class App extends Component {
                   <Control onSearch={this.onSearch} onSort={this.onSort} sortBy={sort.by} sortValue={sort.value} />
                 </div>
                 <div className="row mt-15">
-                  <TaskList onDelete={this.onDelete} onUpdate={this.onUpdate} onFilter={this.onFilter} />
+                  <TaskList onUpdate={this.onUpdate} onFilter={this.onFilter} />
                 </div>
               </div>
             </div>
