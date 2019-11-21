@@ -10,6 +10,8 @@ export default class TaskForm extends Component {
         }
     }
     componentWillMount(){
+        console.log("asd");
+        
         if(this.props.task){
             var {task} = this.props
             this.setState({
@@ -65,6 +67,7 @@ export default class TaskForm extends Component {
             name: '',
             status: false
         })
+        this.onCloseForm()
     }
     render() {
         var {id} = this.state
