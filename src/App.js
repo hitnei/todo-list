@@ -222,7 +222,7 @@ export default class App extends Component {
                 <Control onSearch={this.onSearch} onSort={this.onSort} sortBy={sort.by} sortValue={sort.value}/>
               </div>
               <div className="row mt-15">
-                <TaskList tasks = { tasks } onUpdateStatus={this.onUpdateStatus} onDelete={this.onDelete} onUpdate={this.onUpdate} onFilter={this.onFilter}/>
+                <TaskList onUpdateStatus={this.onUpdateStatus} onDelete={this.onDelete} onUpdate={this.onUpdate} onFilter={this.onFilter}/>
               </div>
             </div>
           </div>
