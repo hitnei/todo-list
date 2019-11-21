@@ -12,7 +12,7 @@ export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      tasks: [],
+      // tasks: [],
       isShowTaskForm: false,
       taskEditting: null,
       filter: {
@@ -25,20 +25,20 @@ export default class App extends Component {
       }
     }
   }
-  UNSAFE_componentWillMount(){
-    if (localStorage && localStorage.getItem('tasks')){
-      var tasks = JSON.parse(localStorage.getItem('tasks'))
-      this.setState({
-        tasks: tasks
-      })
-    }
-  }
-  s4(){
-    return Math.floor((1+Math.random()) * 0x10000).toString(16).substring(1);
-  }
-  generateID(){
-    return this.s4() + this.s4() + '-' + this.s4() + this.s4() + '-' + this.s4() + this.s4() + '-' + this.s4() + this.s4();
-  }
+  // UNSAFE_componentWillMount(){
+  //   if (localStorage && localStorage.getItem('tasks')){
+  //     var tasks = JSON.parse(localStorage.getItem('tasks'))
+  //     this.setState({
+  //       tasks: tasks
+  //     })
+  //   }
+  // }
+  // s4(){
+  //   return Math.floor((1+Math.random()) * 0x10000).toString(16).substring(1);
+  // }
+  // generateID(){
+  //   return this.s4() + this.s4() + '-' + this.s4() + this.s4() + '-' + this.s4() + this.s4() + '-' + this.s4() + this.s4();
+  // }
   onToggleForm = () => {
     if (this.state.isShowTaskForm && this.state.taskEditting !== null)
     this.setState({
@@ -166,40 +166,43 @@ export default class App extends Component {
       i18next.changeLanguage(lng);
       window.render(window.location.replace(window.location.pathname + window.location.search + window.location.hash))
     }
-    var { tasks, isShowTaskForm, taskEditting, filter, keyword, sort } = this.state
-    if (filter){
-      if (filter.name){
-        tasks = tasks.filter((task) => {
-          return task.name.toLowerCase().indexOf(filter.name.toLowerCase()) !== -1
-        })
-      }
-      tasks = tasks.filter((task) => {
-        if (filter.status === -1){
-          return task;
-        }
-        else{
-          return task.status === (filter.status === 1? true : false)
-        }
-      })
-    }
-    if (keyword){
-      tasks = tasks.filter((task) => {
-        return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
-      })
-    }
-    if(sort.by === 'name'){
-      tasks.sort((a, b) => {
-        if (a.name > b.name) return sort.value
-        else if (a.name < b.name) return -sort.value
-        else return 0
-      })
-    } else{
-      tasks.sort((a, b) => {
-        if (a.status > b.status) return sort.value
-        else if (a.status < b.status) return -sort.value
-        else return 0
-      })
-    }
+    var { 
+      // tasks,
+      isShowTaskForm, taskEditting, filter, keyword, sort 
+    } = this.state
+    // if (filter){
+    //   if (filter.name){
+    //     tasks = tasks.filter((task) => {
+    //       return task.name.toLowerCase().indexOf(filter.name.toLowerCase()) !== -1
+    //     })
+    //   }
+    //   tasks = tasks.filter((task) => {
+    //     if (filter.status === -1){
+    //       return task;
+    //     }
+    //     else{
+    //       return task.status === (filter.status === 1? true : false)
+    //     }
+    //   })
+    // }
+    // if (keyword){
+    //   tasks = tasks.filter((task) => {
+    //     return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
+    //   })
+    // }
+    // if(sort.by === 'name'){
+    //   tasks.sort((a, b) => {
+    //     if (a.name > b.name) return sort.value
+    //     else if (a.name < b.name) return -sort.value
+    //     else return 0
+    //   })
+    // } else{
+    //   tasks.sort((a, b) => {
+    //     if (a.status > b.status) return sort.value
+    //     else if (a.status < b.status) return -sort.value
+    //     else return 0
+    //   })
+    // }
     return (
       <div>
         <div className="container">
