@@ -41,7 +41,7 @@ class TaskForm extends Component {
         }
     }
     onCloseForm = (e) => {
-        e.preventDefault()
+        // e.preventDefault()
         this.props.onCloseForm()
     }
     onChange = (event) => {

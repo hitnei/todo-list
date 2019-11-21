@@ -21,6 +21,18 @@ var myReducer = (state = initialState, action) => {
             state.push(newTask)
             localStorage.setItem("tasks", JSON.stringify(state))
             return [...state]
+        
+        case types.UPDATE_STATUS:
+            state.forEach((task, index) => {
+                    if (task.id === action.id) {
+                    state[index] = {
+                        ...state[index],
+                        status: !state[index].status
+                    }
+                }
+            })
+            localStorage.setItem("tasks", JSON.stringify(state))
+            return [...state]
             
         default: return state
     }

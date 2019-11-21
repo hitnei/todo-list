@@ -14,8 +14,6 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      // tasks: [],
-      // isShowTaskForm: false,
       taskEditting: null,
       filter: {
         name: '',
@@ -27,69 +25,12 @@ class App extends Component {
       }
     }
   }
-  // UNSAFE_componentWillMount(){
-  //   if (localStorage && localStorage.getItem('tasks')){
-  //     var tasks = JSON.parse(localStorage.getItem('tasks'))
-  //     this.setState({
-  //       tasks: tasks
-  //     })
-  //   }
-  // }
-  // s4(){
-  //   return Math.floor((1+Math.random()) * 0x10000).toString(16).substring(1);
-  // }
-  // generateID(){
-  //   return this.s4() + this.s4() + '-' + this.s4() + this.s4() + '-' + this.s4() + this.s4() + '-' + this.s4() + this.s4();
-  // }
   onToggleForm = () => {
     this.props.onToggleForm()
-    // if (this.state.isShowTaskForm && this.state.taskEditting !== null)
-    //   this.setState({
-    //     isShowTaskForm: true,
-    //     taskEditting: null
-    //   })
-    // else {
-    //   this.setState({
-    //     isShowTaskForm: !this.state.isShowTaskForm,
-    //     taskEditting: null
-    //   })
-    // }
   }
   onCloseForm = () => {
     this.setState({
       isShowTaskForm: false
-    })
-  }
-  // onSubmit = (data) => {
-  //   var {tasks} = this.state
-  //   if (data.id === ''){
-  //     data.id = this.generateID()
-  //     tasks.push(data)
-  //   }
-  //   else{
-  //     // sua
-  //     tasks.forEach((task, index) => {
-  //       if(task.id === data.id){
-  //         tasks[index] = data
-  //       }
-  //     })
-  //   }
-  //   this.setState({
-  //     tasks,
-  //     taskEditting: null
-  //   })
-  //   localStorage.setItem("tasks", JSON.stringify(tasks))
-  // }
-  onUpdateStatus = (id) => {
-    var { tasks } = this.state
-    tasks.forEach((task, index) => {
-      if (task.id === id) {
-        tasks[index].status = !tasks[index].status
-        this.setState({
-          tasks
-        })
-        localStorage.setItem("tasks", JSON.stringify(tasks))
-      }
     })
   }
   onDelete = (id) => {
@@ -143,26 +84,6 @@ class App extends Component {
       }
     })
   }
-  // onText = () => {
-  //   var tasks = [
-  //     {
-  //       id: this.generateID(),
-  //       name: "Hoc nhay",
-  //       status: true
-  //     },
-  //     {
-  //       id: this.generateID(),
-  //       name: "Hoc nhay",
-  //       status: true
-  //     },
-  //     {
-  //       id: this.generateID(),
-  //       name: "Hoc nhay",
-  //       status: true
-  //     },
-  //   ]
-  //   localStorage.setItem("tasks", JSON.stringify(tasks))
-  // }
   render() {
     // const { t, i18n } = useTranslation;
     const onChangeLanguage = (lng) => {
@@ -170,8 +91,6 @@ class App extends Component {
       window.render(window.location.replace(window.location.pathname + window.location.search + window.location.hash))
     }
     var {
-      // tasks,
-      // isShowTaskForm, 
       taskEditting,
       filter,
       keyword,
@@ -226,14 +145,11 @@ class App extends Component {
                 <button type="button" className="btn btn-primary" onClick={this.onToggleForm}>
                   <span className="fa fa-plus mr-5" />Thêm Công Việc
               </button>
-                {/* <button type="button" className="btn btn-primary" onClick={this.onText}>
-                <span className="fa fa-plus mr-5" />Thêm Công Việc
-              </button> */}
                 <div className="row mt-15">
                   <Control onSearch={this.onSearch} onSort={this.onSort} sortBy={sort.by} sortValue={sort.value} />
                 </div>
                 <div className="row mt-15">
-                  <TaskList onUpdateStatus={this.onUpdateStatus} onDelete={this.onDelete} onUpdate={this.onUpdate} onFilter={this.onFilter} />
+                  <TaskList onDelete={this.onDelete} onUpdate={this.onUpdate} onFilter={this.onFilter} />
                 </div>
               </div>
             </div>
