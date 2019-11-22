@@ -37,11 +37,11 @@ class App extends Component {
       isShowTaskForm: true
     })
   }
-  onSearch = (keyword) => {
-    this.setState({
-      keyword: keyword
-    })
-  }
+  // onSearch = (keyword) => {
+  //   this.setState({
+  //     keyword: keyword
+  //   })
+  // }
   onSort = (sortBy, sortValue) => {
     this.setState({
       sort: {
@@ -73,7 +73,7 @@ class App extends Component {
                 <span className="fa fa-plus mr-5" />Thêm Công Việc
               </button>
               <div className="row mt-15">
-                <Control onSearch={this.onSearch} onSort={this.onSort} sortBy={sort.by} sortValue={sort.value} />
+                <Control onSort={this.onSort} sortBy={sort.by} sortValue={sort.value} />
               </div>
               <div className="row mt-15">
                 <TaskList />

@@ -71,3 +71,10 @@ export const filterTasks = (filter) => {
         filter
     }
 }
+
+export const changeKeyword = (keyword) => {
+    return {
+        type: types.CHANGE_KEYWORD,
+        keyword
+    }
+}

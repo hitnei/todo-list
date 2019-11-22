@@ -10,3 +10,4 @@ export const EDITING_TASK = 'EDITING_TASK';
 export const END_EDITING_TASK = 'END_EDITING_TASK';
 export const CHANGE_FILTER = 'CHANGE_FILTER';
 export const FILTER_TASKS = 'FILTER_TASKS';
+export const CHANGE_KEYWORD = 'CHANGE_KEYWORD';
