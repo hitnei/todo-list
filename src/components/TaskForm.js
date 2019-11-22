@@ -11,28 +11,28 @@ class TaskForm extends Component {
             status: false
         }
     }
-    componentWillMount(){
-        if(this.props.task){
-            var {task} = this.props
+    UNSAFE_componentWillMount() {
+        if (this.props.editingTask) {
+            var { editingTask } = this.props
             this.setState({
-                id: task.id,
-                name: task.name,
-                status: task.status
+                id: editingTask.id,
+                name: editingTask.name,
+                status: editingTask.status
             })
         }
     }
-    componentWillReceiveProps(nextProps){
-        if(nextProps && nextProps.task){
+    UNSAFE_componentWillReceiveProps(nextProps) {        
+        if (nextProps && nextProps.editingTask) {
             // them -> sua
-            var {task} = nextProps
+            var { editingTask } = nextProps
             this.setState({
-                id: task.id,
-                name: task.name,
-                status: task.status
+                id: editingTask.id,
+                name: editingTask.name,
+                status: editingTask.status
             })
         }
-        else if (!nextProps.task){
-            //sua -> them
+        else if (!nextProps.editingTask) {
+            // sua -> them
             this.setState({
                 id: '',
                 name: '',
@@ -43,13 +43,18 @@ class TaskForm extends Component {
     onCloseForm = (e) => {
         // e.preventDefault()
         this.props.onCloseForm()
+        this.setState({
+            id: '',
+            name: '',
+            status: false
+        })
     }
     onChange = (event) => {
         var target = event.target
         var name = target.name
-        var value = target.value
-        if(name === "status"){
-            value = target.value === "true"? true : false
+        var value = target.value        
+        if (name === "status") {
+            value = target.value === "true" ? true : false
         }
         this.setState({
             [name]: value
@@ -57,46 +62,47 @@ class TaskForm extends Component {
     }
     onSubmit = (e) => {
         e.preventDefault()
-        // this.props.onSubmit(this.state)
         this.props.onAddTask(this.state)
         this.onClear()
-        this.onCloseForm()
     }
     onClear = (e) => {
-        // e.preventDefault()
         this.setState({
             id: '',
             name: '',
             status: false
         })
         this.onCloseForm()
+        this.props.endEditingTask()
     }
     render() {
-        var {id} = this.state
+        var {editingTask} = this.props
+        if (!this.props.displayForm) return ""
         return (
             <div>
-                <div className="panel panel-warning">
-                    <div className="panel-heading">
-                        <h3 className="panel-title">{id? "Sửa công việc" : "Thêm Công Việc"}</h3>
-                        <div onClick={this.onCloseForm}><a href="/" className="close"></a></div>
-                    </div>
-                    <div className="panel-body">
-                        <form onSubmit={this.onSubmit}>
-                            <div className="form-group">
-                                <label>Tên :</label>
-                                <input type="text" className="form-control" name="name" value={this.state.name} onChange = {this.onChange}/>
-                            </div>
-                            <label>Trạng Thái :</label>
-                            <select className="form-control" name="status" value={this.state.status} onChange = {this.onChange}>
-                                <option value={true}>Kích Hoạt</option>
-                                <option value={false}>Ẩn</option>
-                            </select>
-                            <br />
-                            <div className="text-center">
-                                <button type="submit" className="btn btn-warning">Thêm</button>&nbsp;
-                                <button onClick={this.onClear} className="btn btn-danger">Hủy Bỏ</button>
-                            </div>
-                        </form>
+                <div className={this.props.displayForm ? "col-xs-4 col-sm-4 col-md-4 col-lg-4" : ""}>
+                    <div className="panel panel-warning">
+                        <div className="panel-heading">
+                            <h3 className="panel-title">{!(editingTask.id==='')? "Sửa công việc" : "Thêm Công Việc"}</h3>
+                            <div onClick={this.onCloseForm}><a href="/" className="close"></a></div>
+                        </div>
+                        <div className="panel-body">
+                            <form onSubmit={this.onSubmit}>
+                                <div className="form-group">
+                                    <label>Tên :</label>
+                                    <input type="text" className="form-control" name="name" value={this.state.name} onChange={this.onChange} />
+                                </div>
+                                <label>Trạng Thái :</label>
+                                <select className="form-control" name="status" value={this.state.status} onChange={this.onChange}>
+                                    <option value={true}>Kích Hoạt</option>
+                                    <option value={false}>Ẩn</option>
+                                </select>
+                                <br />
+                                <div className="text-center">
+                                    <button type="submit" className="btn btn-warning">Thêm</button>&nbsp;
+                                    <button onClick={this.onClear} className="btn btn-danger">Hủy Bỏ</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -104,9 +110,10 @@ class TaskForm extends Component {
     }
 }
 
-const mapStateToProps = () => {
+const mapStateToProps = (state) => {
     return {
-
+        displayForm: state.displayForm,
+        editingTask: state.editingTask
     }
 }
 const mapDispatchToProps = (dispatch, props) => {
@@ -116,6 +123,9 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         onCloseForm: () => {
             dispatch(actions.closeForm())
+        },
+        endEditingTask: () => {
+            dispatch(actions.endEditingTask())
         }
     }
 }

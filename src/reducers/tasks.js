@@ -16,9 +16,22 @@ var myReducer = (state = initialState, action) => {
             return state
 
         case types.ADD_TASK:
-            var newTask = action.task
-            newTask.id = generateID()
-            state.push(newTask)
+            if (action.task.id === ''){
+                // add
+                var newTask = action.task
+                newTask.id = generateID()
+                state.push(newTask)
+                localStorage.setItem("tasks", JSON.stringify(state))
+            }
+            else{
+                // change
+                state.forEach((task, index) => {
+                    if(task.id === action.task.id){
+                        state[index] = action.task
+                        console.log(state[index])
+                    }
+                })
+            }
             localStorage.setItem("tasks", JSON.stringify(state))
             return [...state]
         

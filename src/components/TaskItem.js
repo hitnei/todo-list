@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import * as actions from './../actions/index'
 
 class TaskItem extends Component {
@@ -11,7 +11,8 @@ class TaskItem extends Component {
         this.props.onCloseForm()
     }
     onUpdate = () => {
-        this.props.onUpdate(this.props.task.id)
+        this.props.onOpenform()
+        this.props.onUpdate(this.props.task)
     }
     render() {
         var {task, index} = this.props
@@ -21,7 +22,7 @@ class TaskItem extends Component {
                 <td>{task.name}</td>
                 <td className="text-center">
                     <span onClick={this.onUpdateStatus} className={task.status? "label label-success" : "label label-danger"}>
-                        {task.status? "Kích hoạt" : "Ẩn"}
+                        {task.status ? "Kích hoạt" : "Ẩn"}
                     </span>
                 </td>
                 <td className="text-center">
@@ -39,7 +40,9 @@ class TaskItem extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        
+    }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
@@ -52,6 +55,12 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         onCloseForm: () => {
             dispatch(actions.closeForm())
+        },
+        onOpenform: () => {
+            dispatch(actions.openForm())
+        },
+        onUpdate: (task) => {
+            dispatch(actions.editingTask(task))
         }
     }
 }
