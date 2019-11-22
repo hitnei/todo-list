@@ -4,6 +4,7 @@ import displayForm from './displayForm'
 import editingTask from './editingTask'
 import filter from './filter'
 import keywordSearch from './keywordSearch'
+import sort from './sort'
 
 const myReducer = combineReducers({
     tasks,
@@ -11,6 +12,7 @@ const myReducer = combineReducers({
     editingTask,
     filter,
     keywordSearch,
+    sort,
 })
 
 export default myReducer;

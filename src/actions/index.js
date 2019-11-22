@@ -78,3 +78,10 @@ export const changeKeyword = (keyword) => {
         keyword
     }
 }
+
+export const sortTasks = (sort) => {
+    return {
+        type: types.SORT_TASKS,
+        sort
+    }
+}

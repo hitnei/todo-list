@@ -11,15 +11,6 @@ import * as actions from './actions/index';
 require('dotenv').config();
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      sort: {
-        by: 'name',
-        value: 1
-      }
-    }
-  }
   onToggleForm = () => {
     var {editingTask} = this.props
     if(editingTask && editingTask.id === '') this.props.onToggleForm()
@@ -37,28 +28,12 @@ class App extends Component {
       isShowTaskForm: true
     })
   }
-  // onSearch = (keyword) => {
-  //   this.setState({
-  //     keyword: keyword
-  //   })
-  // }
-  onSort = (sortBy, sortValue) => {
-    this.setState({
-      sort: {
-        by: sortBy,
-        value: sortValue
-      }
-    })
-  }
   render() {
     // const { t, i18n } = useTranslation;
     const onChangeLanguage = (lng) => {
       i18next.changeLanguage(lng);
       window.render(window.location.replace(window.location.pathname + window.location.search + window.location.hash))
     }
-    var {
-      sort
-    } = this.state
     return (
       <div>
         <div className="container">
@@ -73,7 +48,7 @@ class App extends Component {
                 <span className="fa fa-plus mr-5" />Thêm Công Việc
               </button>
               <div className="row mt-15">
-                <Control onSort={this.onSort} sortBy={sort.by} sortValue={sort.value} />
+                <Control />
               </div>
               <div className="row mt-15">
                 <TaskList />
