@@ -57,3 +57,17 @@ export const endEditingTask = () => {
         type: types.END_EDITING_TASK
     }
 }
+
+export const changeFilter = (filter) => {
+    return {
+        type: types.CHANGE_FILTER,
+        filter
+    }
+}
+
+export const filterTasks = (filter) => {
+    return {
+        type: types.FILTER_TASKS,
+        filter
+    }
+}

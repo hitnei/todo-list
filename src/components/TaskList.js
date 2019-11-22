@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import TaskItem from './TaskItem'
 import { connect } from 'react-redux';
+import * as actions from './../actions/index'
 
 class TaskList extends Component {
   constructor(props) {
@@ -14,17 +15,55 @@ class TaskList extends Component {
     var target = event.target
     var name = target.name
     var value = target.value
-    this.props.onFilter(
-      name === "filterName" ? value : this.state.filterName,
-      name === "filterStatus" ? value : this.state.filterStatus,
-    )
+    if (name === "filterStatus") value = parseInt(value)
+    this.props.onFilter({
+      name: name === "filterName" ? value : this.state.filterName,
+      status: name === "filterStatus" ? value : parseInt(this.state.filterStatus),
+    })
     this.setState({
       [name]: value
     })
   }
   render() {
-    var { tasks } = this.props
+    var { tasks, filter } = this.props
     var { filterName, filterStatus } = this.state
+    filterStatus = parseInt(filterStatus)
+
+    // FILTER
+    if (filter) {
+      if (filter.name) {
+        tasks = tasks.filter((task) => {
+          return task.name.toLowerCase().indexOf(filter.name.toLowerCase()) !== -1
+        })
+      }
+      tasks = tasks.filter((task) => {
+        if (filter.status === -1) {
+          return task;
+        }
+        else {
+          return task.status === (filter.status === 1 ? true : false)
+        }
+      })
+      // }
+      // if (keyword){
+      //   tasks = tasks.filter((task) => {
+      //     return task.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
+      //   })
+      // }
+      // if(sort.by === 'name'){
+      //   tasks.sort((a, b) => {
+      //     if (a.name > b.name) return sort.value
+      //     else if (a.name < b.name) return -sort.value
+      //     else return 0
+      //   })
+      // } else{
+      //   tasks.sort((a, b) => {
+      //     if (a.status > b.status) return sort.value
+      //     else if (a.status < b.status) return -sort.value
+      //     else return 0
+      //   })
+    }
+
     var elmTasks = tasks.map((task, index) => {
       return <TaskItem key={index} task={task} index={index} />
     })
@@ -66,7 +105,15 @@ class TaskList extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    tasks: state.tasks
+    tasks: state.tasks,
+    filter: state.filter
   }
 }
-export default connect(mapStateToProps, null)(TaskList)
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    onFilter: (filter) => {
+      dispatch(actions.changeFilter(filter))
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(TaskList)

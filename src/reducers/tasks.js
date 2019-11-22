@@ -56,6 +56,9 @@ var myReducer = (state = initialState, action) => {
             localStorage.setItem("tasks", JSON.stringify(state))
             return [...state]
 
+        case types.FILTER_TASKS:
+            return state
+
         default: 
             return state
     }
