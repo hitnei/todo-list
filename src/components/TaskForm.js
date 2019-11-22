@@ -83,7 +83,7 @@ class TaskForm extends Component {
                     <div className="panel panel-warning">
                         <div className="panel-heading">
                             <h3 className="panel-title">{!(editingTask.id==='')? "Sửa công việc" : "Thêm Công Việc"}</h3>
-                            <div onClick={this.onCloseForm}><a href="/" className="close"></a></div>
+                            <div onClick={this.onCloseForm}><span href="/" className="close" value="."></span></div>
                         </div>
                         <div className="panel-body">
                             <form onSubmit={this.onSubmit}>

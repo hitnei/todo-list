@@ -11,23 +11,21 @@ import * as actions from './actions/index';
 require('dotenv').config();
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      sort: {
+        by: 'name',
+        value: 1
+      }
+    }
+  }
   onToggleForm = () => {
     var {editingTask} = this.props
     if(editingTask && editingTask.id === '') this.props.onToggleForm()
     else {
       this.props.endEditingTask()
     }
-  }
-  onCloseForm = () => {
-    this.setState({
-      isShowTaskForm: false
-    })
-  }
-  
-  onShowForm = () => {
-    this.setState({
-      isShowTaskForm: true
-    })
   }
   render() {
     // const { t, i18n } = useTranslation;
