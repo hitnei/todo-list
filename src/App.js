@@ -23,6 +23,7 @@ class App extends Component {
       isShowTaskForm: false
     })
   }
+  
   onShowForm = () => {
     this.setState({
       isShowTaskForm: true
